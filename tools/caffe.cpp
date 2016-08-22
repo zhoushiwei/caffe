@@ -80,6 +80,7 @@ static BrewFunction GetBrewFunction(const caffe::string& name) {
          it != g_brew_map.end(); ++it) {
       LOG(ERROR) << "\t" << it->first;
     }
+      
     LOG(FATAL) << "Unknown action: " << name;
     return NULL;  // not reachable, just to suppress old compiler warnings.
   }

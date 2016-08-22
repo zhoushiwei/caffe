@@ -116,27 +116,34 @@ int main(int argc, char** argv) {
 #endif
 
   FLAGS_alsologtostderr = 1;
-
-  gflags::SetUsageMessage("This script converts the MNIST dataset to\n"
-        "the lmdb/leveldb format used by Caffe to load data.\n"
-        "Usage:\n"
-        "    convert_mnist_data [FLAGS] input_image_file input_label_file "
-        "output_db_file\n"
-        "The MNIST dataset could be downloaded at\n"
-        "    http://yann.lecun.com/exdb/mnist/\n"
-        "You should gunzip them after downloading,"
-        "or directly use data/mnist/get_mnist.sh\n");
-  gflags::ParseCommandLineFlags(&argc, &argv, true);
-
-  const string& db_backend = FLAGS_backend;
-
-  if (argc != 4) {
-    gflags::ShowUsageWithFlagsRestrict(argv[0],
-        "examples/mnist/convert_mnist_data");
-  } else {
-    google::InitGoogleLogging(argv[0]);
-    convert_dataset(argv[1], argv[2], argv[3], db_backend);
-  }
+    
+    const string& db_backend = FLAGS_backend;
+    const char* image_filename="/Users/zhoushiwei/caffe/data/mnist/train-images-idx3-ubyte";
+    const char* label_filename="/Users/zhoushiwei/caffe/data/mnist/train-labels-idx1-ubyte";
+    const char* db_path="/Users/zhoushiwei/caffe/data/mnist/train";
+    convert_dataset(image_filename,label_filename,db_path, db_backend);
+    
+    
+//  gflags::SetUsageMessage("This script converts the MNIST dataset to\n"
+//        "the lmdb/leveldb format used by Caffe to load data.\n"
+//        "Usage:\n"
+//        "    convert_mnist_data [FLAGS] input_image_file input_label_file "
+//        "output_db_file\n"
+//        "The MNIST dataset could be downloaded at\n"
+//        "    http://yann.lecun.com/exdb/mnist/\n"
+//        "You should gunzip them after downloading,"
+//        "or directly use data/mnist/get_mnist.sh\n");
+//  gflags::ParseCommandLineFlags(&argc, &argv, true);
+//
+//  const string& db_backend = FLAGS_backend;
+//
+//  if (argc != 4) {
+//    gflags::ShowUsageWithFlagsRestrict(argv[0],
+//        "examples/mnist/convert_mnist_data");
+//  } else {
+//    google::InitGoogleLogging(argv[0]);
+//    convert_dataset(argv[1], argv[2], argv[3], db_backend);
+//  }
   return 0;
 }
 #else
